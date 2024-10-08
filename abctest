@@ -1,1 +1,1054 @@
-abcdefg
+# {"code_version": "2.6", "complete_rules": ["Create_Gist_Singleton", "Delete Comment_Pull Request_Compound", "Create_Issue_Compound", "Create_Organization_Singleton", "Revoke All_OAuth Application_Singleton", "Add to Team_Member_Singleton", "Delete_File_Singleton", "Create_Repository_Compound", "Add_Service_Compound", "Delete_Wiki Page_Singleton", "Create_Issue_Singleton", "Attach File_Comment_Singleton", "Delete_Organization_Compound", "Add_Collaborator_Singleton", "Delete_Repository_Singleton", "Delete_Personal Access Token_Compound", "Revoke_Session_Singleton", "Delete_Branch_Compound", "Delete_Service_Compound", "Download Zip_Gist_Singleton", "Export CSV_Audit Log_Compound", "Invite to Organization_Member_Compound", "Create_File_Compound", "Remove_Collaborator_Compound", "Create_Wiki Page_Singleton", "Create_Repository_Singleton", "Delete Comment_Pull Request_Singleton", "Download Zip_Repository_Compound", "Create_Wiki Page_Compound", "Delete Comment_Issue_Compound", "Revoke_Session_Compound", "Delete_Gist_Singleton", "Login Successful_Session_Compound", "Download File_Repository_Compound", "Create_Pull Request_Singleton", "Upload File_Repository_Singleton", "Download File_Repository_Singleton", "Download File_Comment_Compound", "Remove_Collaborator_Singleton", "Revoke All_OAuth Application_Compound", "Import_Repository_Compound", "Import_Repository_Singleton", "Logout_Session_Compound", "Download Zip_Repository_Singleton", "Create_Pull Request_Compound", "Delete_Developer Application_Singleton", "Upload File_Repository_Compound", "Create_File_Singleton", "Register_Developer Application_Singleton", "Logout_Session_Singleton", "Delete Comment_Issue_Singleton", "Delete_Service_Singleton", "Delete_Team_Singleton", "Transfer Ownership_Repository_Compound", "Delete_Branch_Singleton", "Export CSV_Audit Log_Singleton", "Download File_Comment_Singleton", "Delete_File_Compound", "Revoke All_Personal Access Token_Singleton", "Transfer Ownership_Repository_Singleton", "Invite to Organization_Member_Singleton", "Add_Collaborator_Compound", "Delete_Repository_Compound", "Generate_Personal Access Token_Compound", "Add Comment_Pull Request_Compound", "Register_Developer Application_Compound", "Login Failed_Session_Compound", "Delete_Organization_Singleton", "AddtoTeam_Member_Singleton", "Delete_Wiki Page_Compound", "Download Zip_Gist_Compound", "Create_Gist_Compound", "Add Comment_Issue_Compound", "Delete_Gist_Compound", "Login Successful_Session_Singleton", "Generate_Personal Access Token_Singleton", "Add Comment_Pull Request_Singleton", "Delete_Team_Compound", "Add_Service_Singleton", "Revoke_OAuth Application_Compound", "Create_Team_Singleton", "Export JSON_Audit Log_Compound", "Add to Team_Member_Compound", "Create_Organization_Compound", "Add Comment_Issue_Singleton", "Login Failed_Session_Singleton", "Create_Team_Compound", "Export JSON_Audit Log_Singleton", "Delete_Developer Application_Compound", "Revoke_OAuth Application_Singleton", "Delete_Personal Access Token_Singleton", "Revoke All_Personal Access Token_Compound", "Attach File_Comment_Compound"], "incomplete_rules": [], "generated_by": "AutoEPD", "user_accounts_from_log_files": [], "total_runtime": 0.0, "date": "2018-05-15"}
+
+# IMPORTANT NOTE: Regexes in this file are inverted so as to account for the PCRE prefix ?U
+# used by the Gateway when compiling EPD files. That is, *? => *, * => *?, + => +?, and
+# +? => +. Once inverted back by the Gateway, the regexes should operate as they did in Assist.
+
+
+[Global]
+Service: GitHub
+# -- The following is ALL hostnames
+# Hosts: accounts.google.com,api.github.com,api.instabug.com,api.testquality.com,app.buddy.works,app.testquality.com,asdfepd.testquality.com,assets-cdn.github.com,avatars0.githubusercontent.com,avatars1.githubusercontent.com,avatars2.githubusercontent.com,avatars3.githubusercontent.com,cl0udsec.testquality.com,client-s.gateway.messenger.live.com,clients6.google.com,codeload.github.com,collector.githubapp.com,event.api.drift.com,getpocket.cdn.mozilla.net,gist.github.com,github-cloud.s3.amazonaws.com,github-production-repository-file-5c1aeb.s3.amazonaws.com,github-production-upload-manifest-file-7fdce7.s3.amazonaws.com,github.com,help.github.com,live.github.com,login.live.com,mail.google.com,outlook.live.com,people-pa.clients6.google.com,profile.skype.com,raw.githubusercontent.com,render.githubusercontent.com,safebrowsing.googleapis.com,snyk.io,twitter.com,www.google-analytics.com,www.google.com
+# -- The following is all hostnames but with unnecessary entries pruned
+# Hosts: .clients6.google.com,.github.com,accounts.google.com,api.instabug.com,api.testquality.com,app.buddy.works,app.testquality.com,asdfepd.testquality.com,avatars0.githubusercontent.com,avatars1.githubusercontent.com,avatars2.githubusercontent.com,avatars3.githubusercontent.com,cl0udsec.testquality.com,client-s.gateway.messenger.live.com,clients6.google.com,collector.githubapp.com,event.api.drift.com,getpocket.cdn.mozilla.net,github-cloud.s3.amazonaws.com,github-production-repository-file-5c1aeb.s3.amazonaws.com,github-production-upload-manifest-file-7fdce7.s3.amazonaws.com,github.com,login.live.com,mail.google.com,outlook.live.com,profile.skype.com,raw.githubusercontent.com,render.githubusercontent.com,safebrowsing.googleapis.com,snyk.io,twitter.com,www.google-analytics.com,www.google.com
+# -- The following is the same as above but further cleaned-up to remove hostname parts that seem variable
+# Hosts: .clients6.google.com,.github.com,.s3.amazonaws.com,accounts.google.com,api.instabug.com,api.testquality.com,app.buddy.works,app.testquality.com,asdfepd.testquality.com,avatars0.githubusercontent.com,avatars1.githubusercontent.com,avatars2.githubusercontent.com,avatars3.githubusercontent.com,cl0udsec.testquality.com,client-s.gateway.messenger.live.com,clients6.google.com,collector.githubapp.com,event.api.drift.com,getpocket.cdn.mozilla.net,github-cloud.s3.amazonaws.com,github.com,login.live.com,mail.google.com,outlook.live.com,profile.skype.com,raw.githubusercontent.com,render.githubusercontent.com,safebrowsing.googleapis.com,snyk.io,twitter.com,www.google-analytics.com,www.google.com
+# -- The following is only those hostnames on which a signature fired and with unnecessary entries pruned
+# Hosts: .github.com,github-production-repository-file-5c1aeb.s3.amazonaws.com,github-production-upload-manifest-file-7fdce7.s3.amazonaws.com,github.com,raw.githubusercontent.com
+# -- The following is the same as above but further cleaned-up to remove hostname parts that seem variable
+Hosts: github.com,raw.githubusercontent.com,s3.amazonaws.com,github-repository-files.githubusercontent.com
+Protect-Cookie: "GX"
+treat-req-body-as-header: No
+statedb-keytype-required: Yes
+
+#Here instance field is used for organization
+
+get-delineation-info: 'instance', "^(?:POST|GET|PUT|DELETE) https://github.com/([^/]+)/", "^(?:POST|GET|PUT|DELETE) https://gist.github.com/([^/]+)/"
+
+get-delineation-info: 'repository', "^(?:POST|GET|PUT|DELETE) https://github.com/[-a-zA-Z0-9]*/([^/]+)/"
+
+get-delineation-info: 'branch', "^(?:POST|GET|PUT|DELETE) https://github.com/[^ ]+base=[^ ]+%3A([^/]+)&", "^(?:POST|GET|PUT|DELETE) https://github.com/[-a-zA-Z0-9]*/[-a-zA-Z0-9]*/[-a-zA-Z0-9]*/([^/?]+)[/\\n\\r$&;, ]"
+
+get-delineation-info: 'source_branch', "^(?:POST|GET|PUT|DELETE) https://github.com/[^ ]+head=[^ ]+%3A([^/]+)&"
+
+# The above delineated id values are present in most of the GitHub URLs and hence are extracted using the "get-delineation-info" directive.
+# However, in some rules, the req-hdr-pattern is not in the form where "get-delineation-info" directive would be able to extract 
+# correct values (e.g. in use-cases not related to repository, use-cases not containing branch name in the URL etc).
+# In such cases, these respective attribute values should be set to "Not Applicable". 
+##########################################################################
+
+[PreUploadtoGithub]
+# Sample Request Header: GET https://api.github.com/repos/githubuserdlpprod/TEST/git/trees/fec0bfd73668534eeb727641f0224c93aa907b6a HTTP/1.1
+# This rule is hit when file is pushed to Gihub from vscode.dev
+req-hdr-pattern: '^GET https://api.github.com/repos/{STRING:repo_name}/{STRING:branch_name}/git/trees'
+page-scrape: '\"path\": \"{STRING:value}\",.*\"url\": .*/git/blobs/{STRING:key}\"', objid
+SKIP
+
+##########################################################################
+
+[UploadtoGithub]
+# Sample Request Header: GET https://api.github.com/repos/githubuserdlpprod/TEST/git/blobs/bbd307dccc618af3c77a47e80ed18c0a4e104511 HTTP/1.1
+# This rule is hit when file is pushed to Gihub from vscode.dev
+req-hdr-pattern: '^GET https://api.github.com/repos/{STRING:repo_name}/{STRING:Branch_name}/git/blobs/{STRING:blob} HTTP'
+ooo-patterns-req-hdr: '[Aa]uthorization: token {STRING:token}(?:\\n|\\r|$|&|;|,| )'
+map-get: "{token}", {uname}
+map-get: "{blob}", {filename}
+Set: {user_name} = request.cookie("ELASTICA_UNAME")
+#Log-Req-Match: if (request && {uname}) "message": "User updated a repository branch \'{repo_name}\'. Branch name: \'{Branch_name}\'.", "severity": "informational", "facility": "GitHub", "user": "{uname}", "Activity_type": "Upload", "Object_type": "File", "_ObjectName": "{filename}", "_ContentTransaction" : "1", "_TransactionData": "{msg_text}", "_BlockCustomRsp":"This action has been blocked due to an enterprise security policy.", '_BlockRspHeaders':'\\"Content-Length\\": \\"66\\", \\"Content-Type\\": \\"text/html; charset=utf-8\\"', "status_code": "404"
+#Log-Req-Match: if (request && !{uname}) "message": "User updated a repository branch \'{repo_name}\'. Branch name: \'{Branch_name}\'.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Upload", "Object_type": "File", "_ObjectName": "{filename}", "_ContentTransaction" : "1", "_TransactionData": "{msg_text}", "_BlockCustomRsp":"This action has been blocked due to an enterprise security policy.", '_BlockRspHeaders':'\\"Content-Length\\": \\"66\\", \\"Content-Type\\": \\"text/html; charset=utf-8\\"', "status_code": "404"
+rsp-body-pattern: '\"content\": \"{STRING:content}\",'
+base64-decode: "{content}", {content_decoded}
+## ExToPt:True
+Log: if({uname}) "message": "User updated a repository branch \'{repo_name}\'. Branch name: \'{Branch_name}\'.", "severity": "informational", "facility": "GitHub", "user": "{uname}", "Activity_type": "Upload", "Object_type": "File", "_ObjectName": "{filename}", "_ContentTransaction" : "1", "_TransactionData": "{content_decoded}", "_BlockCustomRsp":"This action has been blocked due to an enterprise security policy.", '_BlockRspHeaders':'\\"Content-Length\\": \\"66\\", \\"Content-Type\\": \\"text/html; charset=utf-8\\"', "status_code": "200"
+## ExToPt:True
+Log: if({uname}== "") "message": "User updated a repository branch \'{repo_name}\'. Branch name: \'{Branch_name}\'.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Upload", "Object_type": "File", "_ObjectName": "{filename}", "_ContentTransaction" : "1", "_TransactionData": "{content_decoded}", "_BlockCustomRsp":"This action has been blocked due to an enterprise security policy.", '_BlockRspHeaders':'\\"Content-Length\\": \\"66\\", \\"Content-Type\\": \\"text/html; charset=utf-8\\"', "status_code": "200"
+SKIP
+
+##########################################################################
+
+
+[LoginWithToken]
+# Sample Request Header: GET https://api.github.com/ HTTP/1.1
+req-hdr-pattern: '^GET https://api\\.github\\.com/'
+# can generate a login log here but that will emit with auth-status as well
+# also need to check invalid login case when someone tries with invalid token
+#added set user to keep cloud soc useremail as cloud soc service name.
+Set: {user_name} = request.cookie("ELASTICA_UNAME")
+## ExToPt:True
+Log: "message": "User performed an auth activity.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Auth", "Object_type": "Session", "status_code": "200"
+SKIP
+
+
+##########################################################################
+
+[GraphqlAnchor]
+# Sample Request Header: POST https://api.github.com/graphql HTTP/1.1
+req-hdr-pattern: '^POST https://api\\.github\\.com/graphql HTTP'
+SKIP
+
+##########################################################################
+
+[Auth:GraphqlAnchor]
+# Sample Req Body: {"query":"query UserCurrent{viewer{login}}"}
+# this rule will hit for both logout and auth-status
+req-body-pattern: 'query UserCurrent.*login'
+ooo-patterns-req-hdr: 'Authorization: token {STRING:token}(?:\\n|\\r|$|&|;|,| )'
+Set: {user_name} = request.cookie("ELASTICA_UNAME")
+Log-Req-Match: if (request) "message": "User performed an auth activity.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Auth", "Object_type": "Session", "status_code": "404"
+ooo-patterns-rsp-body: 'login\":\"{STRING:uname}\"'
+map-put: "{token}", {uname}, authid
+## ExToPt:True
+Log: if({uname}) "message": "User performed an auth activity.", "severity": "informational", "facility": "GitHub", "user": "{uname}", "Activity_type": "Auth", "Object_type": "Session", "status_code": "200"
+## ExToPt:True
+Log: if({uname}== "") "message": "User performed an auth activity.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Auth", "Object_type": "Session", "status_code": "200"
+SKIP
+
+##########################################################################
+
+[GistClone]
+# Sample Request Header: POST https://gist.github.com/ec76eec72353e6c36e3f9c2ff452e8cf.git/git-upload-pack HTTP/1.1
+req-hdr-pattern: '^POST https://gist\\.github\\.com/[a-zA-Z0-9]+.git/git-upload-pack'
+ooo-patterns-req-hdr: 'github.com/{REGEX:gist_id:[a-zA-Z0-9]+}.git'
+map-get-req-match: "{gist_id}", {gist_name}
+Set: {user_name} = request.cookie("ELASTICA_UNAME")
+Log-Req-Match: if (request) "message": "User cloned a gist", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Download", "Object_type": "File", "_ObjectName": "{gist_name}" , "instance": "Not Applicable", "status_code": "404"
+rsp-body-pattern: 'done'
+get-rsp-body-size: {file_size}
+## ExToPt:True
+Log: "message": "User cloned a gist.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Download", "Object_type": "File", "_ObjectName": "{gist_name}", "File_Size": "{file_size}", "instance": "Not Applicable", "status_code": "404"
+SKIP
+
+##########################################################################
+
+[GistCreate]
+# Sample Request Header: POST https://api.github.com/gists HTTP/1.1
+req-hdr-pattern: '^POST https://api\\.github\\.com/gists HTTP'
+ooo-patterns-req-body: 'files\":.\"{STRING:gist_name}\"'
+ooo-patterns-req-body: 'public\":{REGEX:is_public:[a-z]+?}'
+# Web based rule also using below but body contains additional metadata as well, so not true size?
+get-req-body-size: {file_size}
+Set: {user_name} = request.cookie("ELASTICA_UNAME")
+Log-Req-Match: if (request) "message": "User created a gist. Object Name : \'{gist_name}\'", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Upload", "Object_type": "File", "_ObjectName": "{gist_name}", "File_Size": "{file_size}", "_ContentInline": "1", "instance": "Not Applicable", "status_code": "200"
+rsp-hdr-pattern: 'HTTP.1.1.{STRING:status_code}.Created'
+rsp-body-pattern: '\"id\":\"{STRING:gist_id}\"'
+ooo-patterns-rsp-body: 'owner\":..login\":\"{STRING:uname}\"'
+map-put: "{gist_id}", {gist_name}, objid
+## ExToPt:True
+Log: if({status_code} == "201" && {is_public}=="true") "message": "User created a public gist. Object Name : \'{gist_name}\'", "severity": "informational", "facility": "GitHub", "user": "{uname}", "Activity_type": "Upload", "Object_type": "File", "_ObjectName": "{gist_name}", "File_Size": "{file_size}", "_ContentInline": "1" , "instance": "Not Applicable", "status_code": "200"
+## ExToPt:True
+Log: if({status_code} == "201" && {is_public}=="false") "message": "User created a secret gist. Object Name : \'{gist_name}\'", "severity": "informational", "facility": "GitHub", "user": "{uname}", "Activity_type": "Upload", "Object_type": "File", "_ObjectName": "{gist_name}", "File_Size": "{file_size}", "_ContentInline": "1", "instance": "Not Applicable", "status_code": "200"
+SKIP
+
+##########################################################################
+
+[GistCloneUsingSharelink]
+# Sample Request Header: POST https://gist.github.com/Elasticatesting/bcb8c7629f68c7aaebb76bd7450fc999/git-upload-pack HTTP/1.1
+req-hdr-pattern: '^POST https://gist\\.github\\.com/[^/]+/{STRING:gist_id}/git-upload-pack'
+map-get-req-match: "{gist_id}", {gist_name}
+Set: {user_name} = request.cookie("ELASTICA_UNAME")
+Log-Req-Match: if (request) "message": "User cloned a gist", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Download", "Object_type": "File", "_ObjectName": "{gist_name}", "instance": "Not Applicable",  "status_code": "404"
+rsp-body-pattern: 'done'
+get-rsp-body-size: {file_size}
+## ExToPt:True
+Log: "message": "User cloned a gist using share link.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Download", "Object_type": "File", "_ObjectName": "{gist_name}", "File_Size": "{file_size}", "instance": "Not Applicable", "status_code": "404"
+SKIP
+
+##########################################################################
+
+[Gitpush]
+# Sample Request Header: POST https://github.com/Elasticatesting/tesss.git/git-receive-pack HTTP/1.1
+req-hdr-pattern: '^POST https://github\\.com/[^/]+/{STRING:repo_name}.git/git-receive-pack'
+Set: {user_name} = request.cookie("ELASTICA_UNAME")
+ooo-patterns-req-body:'refs/heads/{STRING:Branch_name}(?:\\n|\\r|$|&|;|,| )'
+get-req-body-size: {file_size}
+Log-Req-Match: if (request) "message": "User updated a repository branch \'{repo_name}\'. Branch name: \'{Branch_name}\'.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Upload", "Object_type": "File/Folder", "_ObjectName": "{repo_name}", "File_Size": "{file_size}", "_ContentInline": "1",  "branch": "{Branch_name}", "repository": "{repo_name}", "_BlockCustomRsp":"This action has been blocked due to an enterprise security policy.", '_BlockRspHeaders': '\\"Content-Type\\": \\"text/plain; charset=UTF-8\\", \\"Content-Length\\": \\"65\\", \\"Date\\": \\"Thu, 15 Aug 2024 22:43:52 GMT\\", \\"X-Frame-Options\\": \\"DENY\\", \\"X-GitHub-Request-Id\\": \\"47C2:32E84:2A8DFD9:2B504ED:66BE84A8\\", \\"Cache-Control\\": \\"proxy-revalidate\\", \\"Connection\\": \\"keep-alive\\", \\"Age\\": \\"0\\"', "status_code": "401"
+rsp-body-pattern:'ok.refs/heads/'
+## ExToPt:True
+Log: "message": "User updated a repository branch \'{repo_name}\'. Branch name: \'{Branch_name}\'.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Upload", "Object_type": "File/Folder", "_ObjectName": "{repo_name}", "File_Size": "{file_size}", "_ContentInline": "1", "branch": "{Branch_name}",  "repository": "{repo_name}", "_BlockCustomRsp":"This action has been blocked due to an enterprise security policy.", '_BlockRspHeaders': '\\"Content-Type\\": \\"text/plain; charset=UTF-8\\", \\"Content-Length\\": \\"65\\", \\"Date\\": \\"Thu, 15 Aug 2024 22:43:52 GMT\\", \\"X-Frame-Options\\": \\"DENY\\", \\"X-GitHub-Request-Id\\": \\"47C2:32E84:2A8DFD9:2B504ED:66BE84A8\\", \\"Cache-Control\\": \\"proxy-revalidate\\", \\"Connection\\": \\"keep-alive\\", \\"Age\\": \\"0\\"', "status_code": "401"
+SKIP
+
+##########################################################################
+
+[PreGitClone]
+# Sample Request Header: GET https://github.com/elasticatesting3/testingcli.git/info/refs?service=git-upload-pack HTTP/1.1
+req-hdr-pattern: '^GET https://github\\.com/[^/]+/[^/]+.git/info/refs.service=git-upload-pack'
+ooo-patterns-req-hdr:'github\\.com/[^/]+/{STRING:repo_name}.git/'
+Set: {user_name} = request.cookie("ELASTICA_UNAME")
+get-req-body-size: {file_size}
+## ExToPt:True
+Log-Req-Match: if(request) "message": "User initiated cloning a repository \'{repo_name}\'.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Download", "Object_type": "File/Folder", "_ObjectName": "{repo_name}", "File_Size": "{file_size}",  "repository": "{repo_name}", "_BlockCustomRsp":"This action has been blocked due to an enterprise security policy.", '_BlockRspHeaders': '\\"Content-Type\\": \\"text/plain; charset=UTF-8\\", \\"Content-Length\\": \\"65\\", \\"Date\\": \\"Thu, 15 Aug 2024 22:43:52 GMT\\", \\"X-Frame-Options\\": \\"DENY\\", \\"X-GitHub-Request-Id\\": \\"47C2:32E84:2A8DFD9:2B504ED:66BE84A8\\", \\"Cache-Control\\": \\"proxy-revalidate\\", \\"Connection\\": \\"keep-alive\\", \\"Age\\": \\"0\\"', "status_code": "401"
+SKIP
+
+##########################################################################
+
+[RepoCloneAnchor]
+# Sample Request Header: POST https://github.com/Elasticatesting/tes.git/git-upload-pack HTTP/1.1
+req-hdr-pattern: '^POST https://github\\.com/[^/]+/[^/]+.git/git-upload-pack'
+SKIP
+
+##########################################################################
+
+[RepoClone:RepoCloneAnchor]
+# Sample Request Header: POST https://github.com/Elasticatesting/tes.git/git-upload-pack HTTP/1.1
+req-body-pattern: 'done'
+ooo-patterns-req-hdr:'github\\.com/[^/]+/{STRING:repo_name}.git/'
+Set: {user_name} = request.cookie("ELASTICA_UNAME")
+get-rsp-body-size: {file_size}
+## ExToPt:True
+Log: "message": "User cloned a repository \'{repo_name}\'.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Download", "Object_type": "File/Folder", "_ObjectName": "{repo_name}", "File_Size": "{file_size}",  "repository": "{repo_name}", "status_code": "400"
+SKIP
+
+##########################################################################
+
+[GhRepoSync:RepoCloneAnchor]
+# Sample Request Header: POST https://github.com/Elasticatesting/tesss.git/git-upload-pack HTTP/1.1
+req-body-pattern: 'progress'
+ooo-patterns-req-hdr:'github\\.com/[^/]+/{STRING:repo_name}.git/'
+rsp-body-pattern: 'acknowledgments'
+Set: {user_name} = request.cookie("ELASTICA_UNAME")
+get-rsp-body-size: {file_size}
+## ExToPt:True
+Log: "message": "User performed sync for repository \'{repo_name}\'.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Download", "Object_type": "File/Folder", "_ObjectName": "{repo_name}", "File_Size": "{file_size}",  "repository": "{repo_name}", "status_code": "400"
+SKIP
+
+##########################################################################
+
+[GitpullNGitFetch:RepoCloneAnchor]
+# Sample Request Header: POST https://github.com/Elasticatesting/tesss.git/git-upload-pack HTTP/1.1
+req-body-pattern: 'fetch'
+ooo-patterns-req-hdr:'github\\.com/[^/]+/{STRING:repo_name}.git/'
+rsp-body-pattern: 'done.'
+get-rsp-body-size: {file_size}
+Set: {user_name} = request.cookie("ELASTICA_UNAME")
+## ExToPt:True
+Log: "message": "User pulled/fetched a data for repository \'{repo_name}\'.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Download", "Object_type": "File/Folder", "_ObjectName": "{repo_name}", "File_Size": "{file_size}",  "repository": "{repo_name}", "status_code": "400"
+SKIP
+
+##########################################################################
+
+[PreRepoCloneNRwpoSyncInit:RepoCloneAnchor]
+# Sample Request Header: POST https://github.com/Elasticatesting/tes.git/git-upload-pack HTTP/1.1
+req-body-pattern: '0000'
+ooo-patterns-req-body: 'remotes/{STRING:refs1}/'
+ooo-patterns-req-body: '0009d{STRING:done}[\\n]'
+ooo-patterns-req-hdr:'github\\.com/{STRING:uname}/[^/]+.git/'
+ooo-patterns-req-hdr:'github\\.com/[^/]+/{STRING:repo_name}.git/'
+Set: {user_name} = request.cookie("ELASTICA_UNAME")
+ooo-patterns-rsp-body: 'target:{STRING:refs}/'
+get-rsp-body-size: {file_size}
+## ExToPt:True
+Log: if(!{done} && {refs}) "message": "User initiated cloning a repository \'{repo_name}\'.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Download", "Object_type": "File/Folder", "_ObjectName": "{repo_name}", "File_Size": "{file_size}",  "repository": "{repo_name}", "_BlockCustomRsp":"This action has been blocked due to an enterprise security policy.", '_BlockRspHeaders': '\\"Content-Type\\": \\"text/plain; charset=UTF-8\\", \\"Content-Length\\": \\"65\\", \\"Date\\": \\"Thu, 15 Aug 2024 22:43:52 GMT\\", \\"X-Frame-Options\\": \\"DENY\\", \\"X-GitHub-Request-Id\\": \\"47C2:32E84:2A8DFD9:2B504ED:66BE84A8\\", \\"Cache-Control\\": \\"proxy-revalidate\\", \\"Connection: keep-alive\\", \\"Age: 0\\"', "status_code": "200"
+## ExToPt:True
+Log: if({refs1}) "message": "User initiated Sync for repository \'{repo_name}\'.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Download", "Object_type": "File/Folder", "_ObjectName": "{repo_name}", "File_Size": "{file_size}",  "repository": "{repo_name}", "_BlockCustomRsp":"This action has been blocked due to an enterprise security policy.", '_BlockRspHeaders': '\\"Content-Type\\": \\"text/plain; charset=UTF-8\\", \\"Content-Length\\": \\"65\\", \\"Date\\": \\"Thu, 15 Aug 2024 22:43:52 GMT\\", \\"X-Frame-Options\\": \\"DENY\\", \\"X-GitHub-Request-Id\\": \\"47C2:32E84:2A8DFD9:2B504ED:66BE84A8\\", \\"Cache-Control\\": \\"proxy-revalidate\\", \\"Connection\\": \\"keep-alive\\", \\"Age\\": 0\\"', "status_code": "200"
+SKIP
+##########################################################################
+
+[RevokePersonalAccessToken]
+# Host: github.com
+# Sample Request Header: POST https://github.com/organizations/TestFreeOrg2/settings/personal-access-tokens
+req-hdr-pattern: '^POST https://github\\.com/organizations/{STRING:organization_name}/settings/personal-access-tokens'
+req-body-pattern: '_method=delete'
+Set: {user_name} = request.cookie("ELASTICA_UNAME")
+rsp-hdr-pattern2: '^HTTP[^ ]*[ ]{REGEX:Status:[0-9]+}[ ]'
+## ExToPt:True
+Log: if({Status} == "302") "message": "User revoked personal access token from organization.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Logout(Other User)", "Object_type": "Personal Access Token", "instance": "{organization_name}", "branch":"Not Applicable", "repository":"Not Applicable", "status_code": "200"
+SKIP
+##########################################################################
+
+[AUTOEPD_ANCHOR_RULE_0]
+# Host: github.com
+# Sample Request Header: POST https://github.com/organizations HTTP/1.1
+req-hdr-pattern: '^POST https://github\\.com/organizations(?: |(?:&|/|=|\\?)[^ ]*? )HTTP/'
+SKIP
+
+##########################################################################
+
+[AUTOEPD_ANCHOR_RULE_2]
+# Host: github-production-upload-manifest-file-7fdce7.s3.amazonaws.com
+# Sample Request Header: POST https://github-production-upload-manifest-file-7fdce7.s3.amazonaws.com/ HTTP/1.1
+req-hdr-pattern: '^POST https://github-production-[^\\.]*?\\.s3\\.amazonaws\\.com/ HTTP/'
+SKIP
+
+##########################################################################
+
+[AUTOEPD_ANCHOR_RULE_3]
+# Host: github.com
+# Sample Request Header: https://github.com/orgs/TestingTWGW/teams HTTP/1.1
+req-hdr-pattern: '^POST https://github.com/orgs/[^ ]*/teams(?: |(?:&|/|=|\\?)[^ ]*? )HTTP/'
+SKIP
+
+##########################################################################
+
+[AUTOEPD_Page_Scrape_Delete_Team_Singleton_0]
+# Host: github.com
+# Sample Request Header: POST https://github.com/orgs/FOODANDBEVERAGE/teams HTTP/1.1
+req-hdr-pattern: '^GET https://[^ ]*github\\.com/orgs/[^ ]*/teams/toolbar_actions\\?team_slugs'
+page-scrape-rsp-body: 'Box-footer' 'team_ids[^ ][^ ]\"[ ]value=\"{STRING:ID_Teamnames}\"' 'btn btn-block btn-danger'
+page-scrape-rsp-body: 'list-item\">\\n[ ]\17316\175{STRING:NAME_Teamnames}\\n'
+extracted-string-pattern: '{NAME_Teamnames}', '^{STRING:NAME_TeamnamesEx}$'
+map-put: "{ID_Teamnames}", {NAME_TeamnamesEx}, objid
+SKIP
+
+##########################################################################
+
+[AUTOEPD_Delete_Team_Singleton_0:AUTOEPD_ANCHOR_RULE_3]
+# Host: github.com
+# Sample Request Header: POST https://github.com/orgs/FOODANDBEVERAGE/teams HTTP/1.1
+req-body-pattern: 'method=delete'
+ooo-patterns-req-hdr: 'https://github.com/[-a-zA-Z0-9]*/{STRING:instance}/teams'
+ooo-patterns-req-hdr: 'teams/{REGEX:NAME_Teamname:[^\\?/]+?}(?:\\n|\\r|$|&|;|,| )'
+page-scrape-req-body: 'team_ids(?:%5B%5D|[^ ][^ ])={STRING:ID_Teamnames}(?:[\\n\\r&;, ]|$)'
+map-get-req-match: "{ID_Teamnames}", {NAME_Teamnames}
+Set: {user_name} = request.cookie("ELASTICA_UNAME")
+Log-Req-Match: if({NAME_Teamname} != "" && request) "message": "User deleted a team \'{NAME_Teamname}\'.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Delete", "Object_type": "Team", "_ObjectName": "{NAME_Teamname}", "branch": "Not Applicable", "instance": "{instance}", "repository": "Not Applicable", "status_code": "200"
+Log-Req-Match: if({NAME_Teamname} == "" && request) "message": "User deleted a team(s) \'{NAME_Teamnames}\'.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Delete", "Object_type": "Team", "_ObjectName": "{NAME_Teamnames}", "branch": "Not Applicable", "instance": "{instance}", "repository": "Not Applicable", "status_code": "200"
+rsp-hdr-pattern2: '^HTTP[^ ]*[ ]{REGEX:Status:[0-9]+}[ ]'
+## ExToPt:True
+Log: if({NAME_Teamname} != "" && {Status} == "302") "message": "User deleted a  team \'{NAME_Teamname}\'.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Delete", "Object_type": "Team", "_ObjectName": "{NAME_Teamname}", "branch": "Not Applicable", "instance": "{instance}", "repository": "Not Applicable",  "status_code": "200"
+## ExToPt:True
+Log: if({NAME_Teamname} == "" && {Status} == "302") "message": "User deleted a  team(s) \'{NAME_Teamnames}\'.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Delete", "Object_type": "Team", "_ObjectName": "{NAME_Teamnames}", "branch": "Not Applicable", "instance": "{instance}", "repository": "Not Applicable", "status_code": "200"
+SKIP
+
+##########################################################################
+
+[AUTOEPD_ANCHOR_RULE_4]
+# Host: github.com
+# Sample Request Header: POST https://github.com/ZeeshanSaleem2/123Testing/wiki HTTP/1.1
+req-hdr-pattern: '^POST https://github\\.com/[^ ]*/wiki(?: |(?:&|/|=|\\?)[^ ]*? )HTTP/'
+SKIP
+
+##########################################################################
+[Gist_File_Upload_Trace]
+# Sample Request Header: POST https://gist.github.com/upload/policies/assets HTTP/1.1
+req-hdr-pattern: '^POST https://gist.github.com/upload/policies/[^ ]*? HTTP/'
+ooo-patterns-req-header: 'ELASTICA_UNAME={STRING:NAME_username}[\n\r$; ]'
+ooo-patterns-req-header: '[rR]eferer:[ ]https://gist.github.com/{STRING:instance}/'
+rsp-body-pattern: '\"X-Amz-Signature\":\"{STRING:USERID_githubproductionuploadmanifestfile7fdce7s3amazonawscom}\",\".*asset_upload_url\"'
+map-put: "{USERID_githubproductionuploadmanifestfile7fdce7s3amazonawscom}", {NAME_username}, transid
+map-put: "{USERID_githubproductionuploadmanifestfile7fdce7s3amazonawscom}_instance", {instance}, transid
+SKIP
+##########################################################################
+
+[AUTOEPD_ANCHOR_RULE_5]
+# Host: github.com
+# https://gist.github.com/githubuserdlpprod/f21ff79e6361bcfcee60ee9a69bc71a6 HTTP
+req-hdr-pattern: '^POST https://gist.github.com/[^ ]*/[a-z0-9]+ HTTP/'
+SKIP
+
+##########################################################################
+
+[AUTOEPD_Create_Repository_Singleton_0]
+# Host: github.com
+# Sample Request Header: POST https://github.com/repositories HTTP/1.1
+req-hdr-pattern: '^POST https://github\\.com/repositories'
+req-body-pattern: '\"repository[^/]+name\":\"{STRING:REPOSITORY_NAME}\",'
+ooo-patterns-req-body: '\"owner\":\"{STRING:instance}\",'
+Set: {user_name} = request.cookie("ELASTICA_UNAME")
+## ExToPt:True
+Log: "message": "User created a repository. Repository: \'{REPOSITORY_NAME}\'.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Create", "Object_type": "Repository", "_ObjectName": "{REPOSITORY_NAME}","instance":"{instance}", "repository": "{REPOSITORY_NAME}" ,"status_code": "200"
+SKIP
+
+##########################################################################
+
+[AUTOEPD_PAGE_SCRAPE_Delete_Issue_Singleton_0]
+# Host: github.com
+# Sample Request Header: GET https://github.com/GWTestMan/MyFirstRepo/issues
+req-hdr-pattern: '^GET https://github.com/[^ ]*/issues HTTP/'
+page-scrape:'underline.*issues/{REGEX:key:[0-9]+}\">{STRING:value}</a', objid
+SKIP
+
+##########################################################################
+
+[AUTOEPD_Delete_Issue_Singleton_0]
+# Host: github.com
+# Sample Request Header: POST https://github.com/githubuserdlpeu/mypublicrepo001/issues/3 HTTP/1.1
+req-hdr-pattern: '^POST https://github\\.com/[^ ]*?/issues/{REGEX:issue_id:[0-9]+} HTTP/'
+req-body-pattern: "verify_delete=1&_method=delete"
+Set: {user_name} = request.cookie("ELASTICA_UNAME")
+map-get: "{issue_id}", {issue_name}
+## ExToPt:True
+Log: "message": "User \'{user_name}\' deleted issue: \'{issue_name}\'.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Delete", "Object_type": "Issue", "_ObjectName": "{issue_name}", "branch":"Not Applicable", "status_code": "200"
+SKIP
+##########################################################################
+
+[AUTOEPD_AddComment_Issue_Singleton_0]
+# Host: github.com
+# Sample Request Header: POST https://github.com/EPDTRAINER/asdf-rep0/issue_comments HTTP/1.1
+req-hdr-pattern: '^POST https://github\\.com/[^ ]*?/issue_comments HTTP'
+Set: {user_name} = request.cookie("ELASTICA_UNAME")
+rsp-body-pattern: '\"updateContent\":'
+Log-Req-Match: if(request) "message": "User commented on an issue.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Share", "Object_type": "Comment", "_ObjectName": "Unknown", "_SharedWith": "__ALL_EL__", "status_code": "400"
+## ExToPt:True
+Log: "message": "User commented on an issue.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Share", "Object_type": "Comment", "_ObjectName": "Unknown", "_SharedWith": "__ALL_EL__", "status_code": "400"
+SKIP
+
+##########################################################################
+
+[AUTOEPD_AddComment_PullRequest_Singleton_0]
+# Host: github.com
+# Sample Request Header: POST https://github.com/EPDTRAINER/repo/pull/2/comment\?sticky=true HTTP/1.1
+req-hdr-pattern: '^POST https://github\\.com/[^ ]*?/pull/[0-9]+?/comment\\?sticky=true HTTP/'
+Set: {user_name} = request.cookie("ELASTICA_UNAME")
+rsp-body-pattern: '\"updateContent\":'
+## ExToPt:True
+Log: "message": "User commented on a pull request.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Share", "Object_type": "Comment", "_ObjectName": "Unknown", "_SharedWith": "__ALL_EL__", "branch": "Not Applicable", "status_code": "400"
+SKIP
+
+##########################################################################
+
+[AUTOEPD_Member_Share_Organization_Singleton_0:AUTOEPD_ANCHOR_RULE_3]
+# Host: github.com
+# Sample Request Header: POST https://github.com/orgs/Techwards2/teams/team1/members
+ooo-patterns-req-hdr: 'https://github\\.com/orgs/{STRING:Org_Name}/teams/[^ ]*/members'
+req-body-pattern: "'&member={STRING:Name_SharedWith}(?:\\n|\\r|$|&|;|,| )'
+Set: {user_name} = request.cookie("ELASTICA_UNAME")
+## ExToPt:True
+Log: "message": "User \'{user_name}\' invited a member \'{Name_SharedWith}\' to an organization \'{Org_Name}\'.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Share", "Object_type": "Member", "_ObjectName": "{Org_Name}", "_SharedWith": "{Name_SharedWith}", "branch": "Not Applicable", "instance": "{Org_Name}", "repository": "Not Applicable", "status_code": "200"
+SKIP
+
+##########################################################################
+
+[AUTOEPD_PAGE_SCRAPE_Add_Collaboration_Singleton_0]
+# Host: gists.github.com
+# Sample Request Header: GET https://github.com/GWTestMan/hassamsadsad/settings/member_suggestions?add_type=user&q=haris
+req-hdr-pattern: '^GET[ ]https://github.com/[^ ]+settings/member_suggestions\\?add_type=user&q(?: \n|\r|$||&|;| )'
+page-scrape: 'avatars.githubusercontent.com/u/{REGEX:key:[0-9]+}\\?[^~]+[ ]height=\"[0-9]*\"[^~]+(?:<strong>|<h5 class=\"css-truncate css-truncate-overflow\">){STRING:value}(?:</strong>|</h5>)', transid
+SKIP
+
+##########################################################################
+
+[AUTOEPD_Add_Collaborator_Singleton_0]
+# Host: github.com
+# Sample Request Header: POST https://github.com/GWTestMan/MyFirstRepo/members
+req-hdr-pattern: '^POST https://github\\.com/[^ ]*?/{STRING:NAME_Repositoryname}/members HTTP/'
+ooo-patterns-req-body: 'member=user(?:%2F|/){REGEX:ID_SharedWith:[0-9]+}(?:\\n|\\r|$|&|;|,| )'
+ooo-patterns-req-body: 'member=user(?:%2F|/){STRING:NAME_Collaborator}(?:\\n|\\r|$|&|;|,| )'
+Set: {user_name} = request.cookie("ELASTICA_UNAME")
+map-get: "{ID_SharedWith}", {NAME_Collaborator2}
+## ExToPt:True
+Log: if ({NAME_Collaborator2} != "") "message": "User \'{user_name}\' added a collaborator \'{NAME_Collaborator2}\' for repository: \'{NAME_Repositoryname}\'.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Share", "Object_type": "Collaborator", "_ObjectName": "{NAME_Repositoryname}", "_SharedWith": "{NAME_Collaborator2}", "status_code": "200"
+## ExToPt:True
+Log: if ({NAME_Collaborator2} == "") "message": "User \'{user_name}\' added a collaborator \'{NAME_Collaborator}\' for repository: \'{NAME_Repositoryname}\'.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Share", "Object_type": "Collaborator", "_ObjectName": "{NAME_Repositoryname}", "_SharedWith": "{NAME_Collaborator}", "status_code": "200"
+SKIP
+
+##########################################################################
+
+[AUTOEPD_Add_Service_Singleton_0]
+# Host: github.com
+# Sample Request Header: POST https://github.com/EPDTRAINER/_ASDF_REPO/settings/hooks HTTP/1.1
+req-hdr-pattern: '^POST https://github\\.com/[^ ]*?/settings/hooks HTTP/'
+req-body-pattern: 'service={STRING:NAME_Servicename}&'
+Set: {user_name} = request.cookie("ELASTICA_UNAME")
+## ExToPt:True
+Log: "message": "User added a service.  Service  Name: \'{NAME_Servicename}\'.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Connect External", "Object_type": "Service", "status_code": "200"
+SKIP
+
+##########################################################################
+
+[AUTOEPD_AttachFile_Comment_Singleton_or_UploadFile_Repository_Singleton_or_UploadFile_Repository_Compound_0:AUTOEPD_ANCHOR_RULE_2]
+# Host: github-production-upload-manifest-file-7fdce7.s3.amazonaws.com
+# Sample Request Header: POST https://github-production-upload-manifest-file-7fdce7.s3.amazonaws.com/ HTTP/1.1
+req-body-pattern: 'name=\"X-Amz-Signature\"[^ ]*{REGEX:USERID_githubproductionuploadmanifestfile7fdce7s3amazonawscom:[a-zA-Z0-9=/\\+]+?}.*\".*filename=\"{STRING:NAME__ObjectName}\"'
+get-req-body-size: {file_size}
+map-get: "{USERID_githubproductionuploadmanifestfile7fdce7s3amazonawscom}", {user_name}
+map-get: "{USERID_githubproductionuploadmanifestfile7fdce7s3amazonawscom}_branch", {branch}
+map-get: "{USERID_githubproductionuploadmanifestfile7fdce7s3amazonawscom}_repository", {repository}
+map-get: "{USERID_githubproductionuploadmanifestfile7fdce7s3amazonawscom}_instance", {instance}
+
+## ExToPt:True
+Log: "message": "User uploaded a file \'{NAME__ObjectName}\'.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Upload", "Object_type": "File", "_ObjectName": "{NAME__ObjectName}", "File_Size": "{file_size}", "_ContentInline": "1",  "branch": "{branch}", "instance": "{instance}", "repository": "{repository}", "status_code": "200"
+SKIP
+
+##########################################################################
+
+[AUTOEPD_Create_File_Singleton_0]
+# Host: github.com
+# Sample Request Header: POST https://github.com/Testing/testing123/create HTTP/1.1
+req-hdr-pattern: '^POST https://github\\.com/[^/]*/{STRING:NAME_Repositoryname}/create/'
+req-body-pattern: 'name=\"filename\"[^/]*{REGEX:NAME__ObjectName:[^\\n\\r]+}[\\n\\r]+[-]'
+Set: {user_name} = request.cookie("ELASTICA_UNAME")
+get-req-body-size: {file_size}
+Log-Req-Match: if(request) "message": "User created a file \'{NAME__ObjectName}\'.  Repository Name: \'{NAME_Repositoryname}\'.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Upload", "Object_type": "File", "File_Size": "{file_size}", "_ContentInline": "1", "_ObjectName": "{NAME__ObjectName}", "status_code": "404"
+rsp-hdr-pattern2: '^HTTP[^ ]*[ ]{REGEX:status:[0-9]+}[ ]'
+## ExToPt:True
+Log: if({status} == "200") "message": "User created a file \'{NAME__ObjectName}\'.  Repository Name: \'{NAME_Repositoryname}\'.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Upload", "Object_type": "File", "File_Size": "{file_size}", "_ContentInline": "1", "_ObjectName": "{NAME__ObjectName}", "status_code": "200"
+SKIP
+
+##########################################################################
+
+[AUTOEPD_Edit_File_Singleton_0]
+# Host: github.com
+# Sample Request Header: POST https://github.com/Elasticatesting/repository-name/tree-save/main/filename HTTP/1.1
+req-hdr-pattern: '^POST https://github.com/[^/]*/{REGEX:NAME_Repositoryname:[^/]*}/tree.save/[^ ]*?/{REGEX:NAME__ObjectName:[^/]*} HTTP'
+Set: {user_name} = request.cookie("ELASTICA_UNAME")
+get-req-body-size: {file_size}
+Log-Req-Match: if (request) "message": "User edited a file \'{NAME__ObjectName}\'.  Repository Name: \'{NAME_Repositoryname}\'.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Upload", "Object_type": "File", "File_Size": "{file_size}", "_ObjectName": "{NAME__ObjectName}", "_ContentInline": "1", "status_code": "404"
+rsp-hdr-pattern2: '^HTTP[^ ]*[ ]{REGEX:status:[0-9]+}[ ]'
+## ExToPt:True
+Log: if({status} == "200") "message": "User edited a file \'{NAME__ObjectName}\'.  Repository Name: \'{NAME_Repositoryname}\'.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Upload", "Object_type": "File", "File_Size": "{file_size}", "_ObjectName": "{NAME__ObjectName}", "_ContentInline": "1", "status_code": "404"
+SKIP
+
+##########################################################################
+
+[AUTOEPD_Create_Issue_Singleton_0]
+# Host: github.com
+# Sample Request Header: POST https://github.com/elasticaepd/testingtesting123/issues HTTP/1.1
+req-hdr-pattern: '^POST https://github\\.com/[^ ]*?/issues HTTP/'
+ooo-patterns-req-body: 'title(?:%5D|])={STRING:ISSUE_Name}&'
+Set: {user_name} = request.cookie("ELASTICA_UNAME")
+## ExToPt:True
+Log: "message": "User \'{user_name}\' created an issue: \'{ISSUE_Name}\'.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Create", "Object_type": "Issue", "_ObjectName": "{ISSUE_Name}", "status_code": "200"
+SKIP
+
+##########################################################################
+
+[AUTOEPD_Create_Gist_Singleton_0]
+# Host: gist.github.com
+# Sample Request Header: POST https://gist.github.com/ HTTP/1.1
+req-hdr-pattern: '^POST https://gist.github.com/ HTTP/'
+Set: {user_name} = request.cookie("ELASTICA_UNAME")
+req-body-pattern: 'gist%5Bcontents%5D%5B%5D%5Bname%5D='
+ooo-patterns-req-body: 'gist%5Bcontents%5D%5B%5D%5Bname%5D={STRING:NAME_Gistname}&'
+ooo-patterns-req-body: 'gist%5Bcontents%5D%5B%5D%5Bvalue%5D={STRING:NAME_Content}&'
+get-req-body-size: {file_size}
+Log-Req-Match: if(request) "message": "User created a gist. Gist Name: \'{NAME_Gistname}\'.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Upload", "Object_type": "File", "_ObjectName": "{NAME_Gistname}", "File_Size": "{file_size}", "_ContentInline": "1", "_EncodingType":"none", "_B64Regex":"Z2lzdCU1QmNvbnRlbnRzJTVEJTVCJTVEJTVCdmFsdWUlNUQ9KC4qKSg/OlxufFxyfCR8Jnw7fCx8ICk=", "instance": "Not Applicable", "status_code": "200"
+rsp-hdr-pattern2: 'HTTP/... {STRING:Status} '
+ooo-patterns-rsp-hdr: 'Location:[ ]https://gist.github.com/[-a-zA-Z0-9]+/{STRING:ID}(?:\n|\r|$|&|;|,)'
+#gistfile1.txt autogenerated file name
+map-put: "{ID}", {NAME_Gistname}, transid
+## ExToPt:True
+Log: if({Status} == "302" && {NAME_Gistname} != "") "message": "User created a gist \'{NAME_Gistname}\'.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Upload", "Object_type": "File", "_ObjectName": "{NAME_Gistname}", "File_Size": "{file_size}", "_ContentInline": "1",  "_EncodingType":"none", "_B64Regex":"Z2lzdCU1QmNvbnRlbnRzJTVEJTVCJTVEJTVCdmFsdWUlNUQ9KC4qKSg/OlxufFxyfCR8Jnw7fCx8ICk=", "instance": "Not Applicable", "status_code": "200"
+## ExToPt:True
+Log: if({Status} == "302" && {NAME_Gistname} == "") "message": "User created a gist \'gistfile1.txt\'.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Upload", "Object_type": "File", "_ObjectName": "gistfile1.txt", "File_Size": "{file_size}", "_ContentInline": "1",  "_EncodingType":"none", "_B64Regex":"Z2lzdCU1QmNvbnRlbnRzJTVEJTVCJTVEJTVCdmFsdWUlNUQ9KC4qKSg/OlxufFxyfCR8Jnw7fCx8ICk=", "instance": "Not Applicable", "status_code": "200"
+SKIP
+
+##########################################################################
+
+[AUTOEPD_Edit_Gist_Singleton_0:AUTOEPD_ANCHOR_RULE_5]
+# Host: gist.github.com
+ooo-patterns-req-header: 'https://gist.github.com/[^ ]*/{REGEX:gist_id:[0-9a-z]+}(?: |(?:&|/|=|\\?)[^ ]*? )HTTP'
+req-body-pattern: 'gist%5Bcontents%5D%5B%5D%5Bname%5D={STRING:NAME_Gistname}&'
+Set: {user_name} = request.cookie("ELASTICA_UNAME")
+Log-Req-Match: if(request) "message": "User edited a gist. Gist Name: \'{NAME_Gistname}\'.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Upload", "Object_type": "File", "_ObjectName": "{NAME_Gistname}", "File_Size": "{file_size}", "_ContentInline": "1", "_EncodingType":"none", "_B64Regex":"Z2lzdCU1QmNvbnRlbnRzJTVEJTVCJTVEJTVCdmFsdWUlNUQ9KC4qKSg/OlxufFxyfCR8Jnw7fCx8ICk=", "status_code": "200"
+rsp-hdr-pattern2: 'HTTP/... {STRING:Status} '
+map-put: "{gist_id}", {NAME_Gistname}, transid
+## ExToPt:True
+Log: if({Status} == "302" && {NAME_Gistname} != "") "message": "User edited a gist \'{NAME_Gistname}\'.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Upload", "Object_type": "File", "_ObjectName": "{NAME_Gistname}", "File_Size": "{file_size}", "_ContentInline": "1",  "_EncodingType":"none", "_B64Regex":"Z2lzdCU1QmNvbnRlbnRzJTVEJTVCJTVEJTVCdmFsdWUlNUQ9KC4qKSg/OlxufFxyfCR8Jnw7fCx8ICk=", "status_code": "200"
+## ExToPt:True
+Log: if({Status} == "302" && {NAME_Gistname} == "") "message": "User edited a gist \'{NAME_Gistname}\'.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Upload", "Object_type": "File", "_ObjectName": "gistfile1.txt", "File_Size": "{file_size}", "_ContentInline": "1",  "_EncodingType":"none", "_B64Regex":"Z2lzdCU1QmNvbnRlbnRzJTVEJTVCJTVEJTVCdmFsdWUlNUQ9KC4qKSg/OlxufFxyfCR8Jnw7fCx8ICk=", "status_code": "200"
+
+SKIP
+
+##########################################################################
+
+[AUTOEPD_Create_Organization_Singleton_0:AUTOEPD_ANCHOR_RULE_0]
+# Host: github.com
+# Sample Request Header: POST https://github.com/organizations HTTP/1.1
+req-body-pattern: 'profile_name%5D={STRING:organization_name}&organization'
+Set: {user_name} = request.cookie("ELASTICA_UNAME")
+Log-Req-Match: if(request && {organization_name} != "") "message": "User created an organization. Organization Name: \'{organization_name}\'.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Create", "Object_type": "Organization", "_ObjectName": "{organization_name}","instance": "{organization_name}", "status_code": "200"
+Log-Req-Match: if(request && {organization_name} == "") "message": "User created a gist.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Upload", "Object_type": "File", "_ObjectName": "Unknown", "File_Size": "{file_size}", "instance": "Not Applicable", "status_code": "200"
+rsp-hdr-pattern2: '^HTTP[^ ]*[ ]{REGEX:status:[0-9]+}[ ]'
+## ExToPt:True
+Log: if({status} == "302") "message": "User created an organization. Organization Name: \'{organization_name}\'.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Create", "Object_type": "Organization", "_ObjectName": "{organization_name}","instance": "{organization_name}", "status_code": "200"
+## ExToPt:True
+Log: if({organization_name} == "" && {status} == "302") "message": "User created a gist.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Upload", "Object_type": "File", "_ObjectName": "Unknown", "File_Size": "{file_size}", "instance": "Not Applicable", "status_code": "200"
+SKIP
+
+##########################################################################
+
+[AUTOEPD_Create_PullRequest_Singleton_0]
+# Host: github.com
+# Sample Request Header: POST https://github.com/EPDTRAINER/R_3_P_0_5_1_T_0_R_Y/pull/create HTTP/1.1
+req-hdr-pattern: '^POST https://github\\.com/[^ ]*/{STRING:NAME_Repositoryname}/pull/create(?: |(?:&|/|=|\\?)[^ ]*? )HTTP'
+Set: {user_name} = request.cookie("ELASTICA_UNAME")
+## ExToPt:True
+Log: "message": "User created a pull request in Repository Name: \'{NAME_Repositoryname}\'.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Create", "Object_type": "Pull Request", "_ObjectName": "{NAME_Repositoryname}", "status_code": "200"
+SKIP
+
+##########################################################################
+
+[AUTOEPD_Create_Team_Singleton_0:AUTOEPD_ANCHOR_RULE_3]
+# Host: github.com
+# Sample Request Header: POST https://github.com/orgs/c-r-e-a-t-e-o-r-g/teams HTTP/1.1
+req-body-pattern: 'team%5Bname%5D={STRING:NAME_Teamname}&team%5Bdescription%5D='
+ooo-patterns-req-hdr: 'https://github.com/[-a-zA-Z0-9]*/{STRING:instance}/teams'
+Set: {user_name} = request.cookie("ELASTICA_UNAME")
+## ExToPt:True
+Log: "message": "User created a team \'{NAME_Teamname}\'.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Create", "Object_type": "Team", "_ObjectName": "{NAME_Teamname}", "branch": "Not Applicable", "instance": "{instance}", "repository": "Not Applicable", "status_code": "200"
+SKIP
+
+##########################################################################
+
+[AUTOEPD_Create_WikiPage_Singleton_0:AUTOEPD_ANCHOR_RULE_4]
+# Host: github.com
+# Sample Request Header: POST https://github.com/Testing/123Testing/wiki HTTP/1.1
+req-body-pattern: '^auth[^ ]*name(?:%5D|])={STRING:wiki_name}&'
+rsp-hdr-pattern2: '^HTTP[^ ]*[ ]{REGEX:status:[0-9]+}[ ]'
+Set: {user_name} = request.cookie("ELASTICA_UNAME")
+## ExToPt:True
+Log: if({status} == "302") "message": "User created a wiki page: Page: \'{wiki_name}\'", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Create", "Object_type": "Wiki Page", "_ObjectName": "{wiki_name}", "status_code": "200"
+SKIP
+
+##########################################################################
+
+[AUTOEPD_DeleteComment_PullRequest_Singleton_or_DeleteComment_Issue_Singleton_0]
+# Host: github.com
+# Sample Request Header: POST https://github.com/EPDTRAINER/asdf-rep0/issue_comments/354897901 HTTP/1.1
+req-hdr-pattern: '^POST https://github\\.com/[^ ]*?/issue_comments/[0-9]+? HTTP/'
+req-body-pattern: 'name=\"_method\"[^a-z]*?delete'
+Set: {user_name} = request.cookie("ELASTICA_UNAME")
+## ExToPt:True
+Log: "message": "User deleted a comment on a pull request or issue.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Delete", "Object_type": "Issue/Pull Request", "status_code": "200"
+SKIP
+
+##########################################################################
+
+[AUTOEPD_Delete_Branch_Singleton_0]
+# Host: github.com
+# Sample Request Header: POST https://github.com/000rgan1zat10n/0RG-R_3_P_0_5_1_T_0_R_Y/branches/name ... C-H HTTP/1.1
+req-hdr-pattern: '^POST https://github\\.com/[^ ]*/branches/{STRING:branch_name}[\\n\\r$&;, ]'
+req-body-pattern: 'delete'
+Set: {user_name} = request.cookie("ELASTICA_UNAME")
+## ExToPt:True
+Log: "message": "User deleted a branch. Object Name: \'{branch_name}\'.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Delete", "Object_type": "Branch", "_ObjectName": "{branch_name}",  "status_code": "200"
+SKIP
+
+##########################################################################
+
+[Delete_Branch]
+# Host: github.com
+# Sample Request Header: DELETE https://github.com/githubuserdlpprod/TEST/branches/test_sp1
+req-hdr-pattern: '^DELETE https://github\\.com/[^ ]*/branches/{STRING:branch_name}[\\n\\r$&;, ]'
+Set: {user_name} = request.cookie("ELASTICA_UNAME")
+## ExToPt:True
+Log: "message": "User deleted a branch \'{branch_name}\'.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Delete", "Object_type": "Branch", "_ObjectName": "{branch_name}",  "status_code": "200"
+SKIP
+
+##########################################################################
+
+[AUTOEPD_Delete_Branch_Singleton_1]
+# Host: github.com
+# Sample Request Header: POST 	https://github.com/GWTestMan/RepositoryForTesting/pull/4/cleanup HTTP/1.1
+req-hdr-pattern: '^POST https://github.com/[^ ]*/pull/[0-9]+/cleanup HTTP'
+Set: {user_name} = request.cookie("ELASTICA_UNAME")
+Log-Req-Match: if(request) "message": "User deleted a branch.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Delete", "Object_type": "Branch", "_ObjectName": "Unknown",  "status_code": "200"
+rsp-body-pattern: 'head-ref-deleted-event-ref-name[^\\n]*\">.n........{STRING:BRANCH_NAME}.n</span>'
+## ExToPt:True
+Log: if({BRANCH_NAME}) "message": "User deleted a branch \'{BRANCH_NAME}\'.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Delete", "Object_type": "Branch", "_ObjectName": "{BRANCH_NAME}",  "status_code": "200"
+SKIP
+
+##########################################################################
+[Developer_Application_Trace]
+#sample req header: GET https://github.com/settings/developers
+req-hdr-pattern: '^GET https://github.com/settings/developers HTTP/'
+#href="/settings/applications/2130883">APP1</a>
+page-scrape: 'href=\"/settings/applications/{STRING:key}\">{STRING:value}</a', objid
+SKIP
+##########################################################################
+
+[AUTOEPD_Delete_DeveloperApplication_Singleton_0]
+# Host: github.com
+# Sample Request Header: POST https://github.com/settings/applications/appname
+req-hdr-pattern: '^POST https://github\\.com/settings/applications/{STRING:github_app_id} HTTP/'
+req-body-pattern: '_method=delete'
+rsp-hdr-pattern2: '^HTTP[^ ]*[ ]{REGEX:status:[0-9]+}[ ]'
+map-get: '{github_app_id}', {github_app_name}
+Set: {user_name} = request.cookie("ELASTICA_UNAME")
+## ExToPt:True
+Log: if({status} == "302") "message": "User deleted a developer application \'{github_app_name}\'.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Delete", "Object_type": "Developer Application", "branch": "Not Applicable", "instance": "Not Applicable", "repository": "Not Applicable", "status_code": "200"
+SKIP
+
+##########################################################################
+
+[AUTOEPD_Delete_File_Singleton_0]
+# Host: github.com
+# Sample Request Header: POST https://github.com/EPDTRAINER/epdtrainerzrepo/blob/master/.gitignore HTTP/1.1
+req-hdr-pattern: '^POST https://github\\.com/[^<]*/blob/[^<]*/{REGEX:NAME_Filename:[^<]*} HTTP'
+Set: {user_name} = request.cookie("ELASTICA_UNAME")
+Log-Req-Match: if (request) "message": "User deleting a file \'{NAME_Filename}\'.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Delete", "Object_type": "File", "_ObjectName": "{NAME_Filename}" ,"status_code": "200"
+rsp-hdr-pattern2: '^HTTP[^ ]*[ ]{REGEX:status:[0-9]+}[ ]'
+## ExToPt:True
+Log: if ({status} == "200") "message": "User deleted a file \'{NAME_Filename}\'.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Delete", "Object_type": "File", "_ObjectName": "{NAME_Filename}" ,"status_code": "200"
+SKIP
+
+##########################################################################
+
+[DownloadZip_Gist_Trace]
+# Sample Request Header: https://gist.github.com/githubuserdlpprod/a4fb0862e8db3c1529e98edb3bd1b7a4/archive/709cdeb9bf0fb488ebcf699060ca957d931efaec.zip
+req-hdr-pattern :'^GET https://gist.github.com/[^ ]*.zip'
+ooo-patterns-req-hdr: 'https://gist.github.com/{STRING:instance}/', 'https://gist.github.com/[-a-zA-Z0-9]*/{STRING:ID}/'
+map-put: "{ID}", {instance}, transid
+SKIP
+##########################################################################
+
+[AUTOEPD_PAGE_SCRAPE_Delete_Gists_Singleton_0]
+# Host: gists.github.com
+# Sample Request Header: GET https://gist.github.com/[^ ]*/b509d3cdfe220ba8973a62e198db15dc
+# req-hdr-pattern: '^GET https://gist\\.github\\.com/[^ ]* HTTP'
+req-hdr-pattern: '^GET[ ]https://gist.github.com/[a-zA-Z0-9]+/{STRING:ID_ObjectName}[ ]HTTP'
+ooo-patterns-rsp-body: 'a[ ]href[^ ]+\">{STRING:Gists_name}</a>'
+page-scrape: '<a[ ]href=\"/[^ ]*/{REGEX:key:[0-9a-z]+}\"><strong[^/]*target\">{STRING:value}</strong>', objid
+map-put: "{ID_ObjectName}", {Gists_name}, objid
+SKIP
+
+##########################################################################
+
+[AUTOEPD_Delete_Gist_Singleton_0:AUTOEPD_ANCHOR_RULE_5]
+# Host: gist.github.com
+req-body-pattern: '_method=delete'
+ooo-patterns-req-header: 'https://gist.github.com/[^ ]*/{REGEX:gist_id:[0-9a-z]+}(?: |(?:&|/|=|\\?)[^ ]*? )HTTP'
+map-get: "{gist_id}", {gist_name}
+Set: {user_name} = request.cookie("ELASTICA_UNAME")
+## ExToPt:True
+Log: "message": "User deleted a gist \'{gist_name}\'.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Delete", "Object_type": "Gist", "_ObjectName": "{gist_name}", "status_code": "200"
+SKIP
+
+##########################################################################
+
+[AUTOEPD_Delete_Organization_Singleton_0:AUTOEPD_ANCHOR_RULE_0]
+# Host: github.com
+# Sample Request Header: POST https://github.com/organizations/techwards3
+ooo-patterns-req-header: 'POST https://github\\.com/organizations/{STRING:organization_name}[\\n\\r$&;, ]'
+req-body-pattern: '_method=delete'
+Set: {user_name} = request.cookie("ELASTICA_UNAME")
+## ExToPt:True
+Log: "message": "User deleted an organization. Organization Name: \'{organization_name}\'.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Delete", "Object_type": "Organization", "_ObjectName": "{organization_name}", "instance":"{organization_name}","repository":"Not Applicable", "status_code": "200"
+SKIP
+
+##########################################################################
+
+[AUTOEPD_Delete_PersonalAccessToken_Singleton_0]
+# Host: github.com
+# Sample Request Header: POST https://github.com/settings/tokens/181165208 HTTP/1.1
+req-hdr-pattern: '^POST https://github\\.com/settings/(?:|personal-access-)tokens/[0-9]+ HTTP/'
+#https://regex101.com/r/iH1WWn/1
+#https://regex101.com/r/eHOuTV/1
+req-body-pattern: '_method.*delete.*authenticity_token'
+Set: {user_name} = request.cookie("ELASTICA_UNAME")
+## ExToPt:True
+Log: "message": "User deleted a personal access token.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Delete", "Object_type": "Personal Access Token", "instance": "Not Applicable", "branch":"Not Applicable", "repository":"Not Applicable", "status_code": "200"
+SKIP
+
+##########################################################################
+
+[AUTOEPD_Delete_Repository_Singleton_0]
+# Host: github.com
+# Sample Request Header: POST https://github.com/EPDTRAINER/epdtrainerzrepo/settings/delete HTTP/1.1
+req-hdr-pattern: '^POST https://github\\.com/[^ ]*/settings/delete(?: |(?:&|/|=|\\?)[^ ]*? )HTTP/'
+Set: {user_name} = request.cookie("ELASTICA_UNAME")
+ooo-patterns-req-body: 'verify=[^ ]*%2F{STRING:REPOSITORY_NAME}(?:\n|\r|$|&|;|,| )'
+## ExToPt:True
+Log: "message": "User deleted a repository \'{REPOSITORY_NAME}\'.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Delete", "Object_type": "Repository", "_ObjectName": "{REPOSITORY_NAME}", "branch":"Not Applicable","status_code": "200"
+SKIP
+
+##########################################################################
+
+[AUTOEPD_Delete_WikiPage_Singleton_0:AUTOEPD_ANCHOR_RULE_4]
+# Host: github.com
+# Sample Request Header: POST https://github.com/Testing/123Testing/wiki HTTP/1.1
+ooo-patterns-req-hdr: 'Referer: https://github.com[^ ]*wiki/{STRING:wiki_name}/_edit'
+req-body-pattern: '_method=delete'
+Set: {user_name} = request.cookie("ELASTICA_UNAME")
+## ExToPt:True
+Log: "message": "User deleted a wiki page. wiki page Name: \'{wiki_name}\'.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Delete", "Object_type": "Wiki Page", "_ObjectName": "{wiki_name}", "branch":"Not Applicable", "status_code": "200"
+SKIP
+
+###################################################################################
+
+[AUTOEPD_Page_Scrape_DownloadFile_Repository_Singleton_0]
+# Host: github.com
+# Sample Request Header: GET https://github.com/GWTestMan/MyFirstRepo/raw/main/README.md
+req-hdr-pattern: "^GET https://github\\.com/[^ ]*/raw/[^ ]+ HTTP/"
+ooo-patterns-req-hdr: "[Rr]eferer:[ ]https:[^ ]+blob/[^ ]+/{STRING:ref_id}(?:\\n|\\r|$|&|;|,| )"
+ooo-patterns-req-hdr: 'ELASTICA_UNAME={STRING:uname}(?:\\n|\\r|$|&|;|,| )'
+map-put: "{ref_id}", {uname}, objid
+SKIP
+
+###################################################################################
+
+[AUTOEPD_DownloadFile_Repository_Singleton_0]
+# Host: raw.githubusercontent.com
+# Sample Request Header: GET https://raw.githubusercontent.com/EPDTRAINER/asdf-rep0/master/_ASDF_1533.pdf HTTP/1.1
+req-hdr-pattern: '^GET https://raw\\.githubusercontent\\.com/[^ ]*?/{STRING:NAME__ObjectName}[\\n\\r$&;, ]'
+ooo-patterns-req-hdr: 'https://raw.githubusercontent.com/{STRING:instance}/','https://raw.githubusercontent.com/[-a-zA-Z0-9]*/{STRING:repository}/','https://raw.githubusercontent.com/[-a-zA-Z0-9]*/[-a-zA-Z0-9]*/{STRING:branch}/'
+ooo-patterns-req-hdr: "[Rr]eferer:[ ]https:[^ ]+blob/[^ ]+/{STRING:ref_id}(?:\n|\r| |;|,)"
+get-rsp-body-size: {file_size}
+map-get: "{ref_id}", {uname}
+rsp-hdr-pattern2: '^HTTP[^ ]*[ ]{REGEX:status:[0-9]+}[ ]'
+## ExToPt:True
+Log:if({status} == "200" || {status} == "302") "message": "User downloaded a repository file \'{NAME__ObjectName}\'.", "severity": "informational", "facility": "GitHub", "user": "{uname}", "Activity_type": "Download", "Object_type": "File", "_ObjectName": "{NAME__ObjectName}", "File_Size": "{file_size}", "_ContentInline": "1","branch": "{branch}", "instance": "{instance}", "repository": "{repository}", "status_code": "400"
+SKIP
+
+#################################################################################
+
+[AUTOEPD_DownloadFile_Comment_Singleton_0]
+# Host: github-production-repository-file-5c1aeb.s3.amazonaws.com
+# Sample Request Header: GET https://github-repository-file.githubusercontent.com/118576023/191 ... pdf HTTP/1.1
+req-hdr-pattern: '^GET https://github-repository-files\\.githubusercontent\\.com/[^ ]*?&X-Amz-Date={STRING:userID}&X-Amz-Expires=[^ ]*plain'
+map-get: "{userID}", {uname}
+ooo-patterns-rsp-hdr: 'Content-Disposition: attachment.filename={STRING:NAME__ObjectName}(?:\n|$|\r)'
+get-rsp-body-size: {file_size}
+## ExToPt:True
+Log: "message": "User downloaded a file from a comment \'{NAME__ObjectName}\'.", "severity": "informational", "facility": "GitHub", "user": "{uname}", "Activity_type": "Download", "Object_type": "File", "_ObjectName": "{NAME__ObjectName}", "File_Size": "{file_size}", "_ContentInline": "1", "status_code": "200"
+SKIP
+
+##########################################################################
+
+
+[AUTOEPD_DownloadZip_Gist_Singleton_0]
+# Host: codeload.github.com
+# Sample Request Header: GET https://codeload.github.com/gist/bc1fd41658c87b7f5160244fbf184c14/zip/21ba6679c ... A== HTTP/1.1
+req-hdr-pattern: '^GET https://codeload\\.github\\.com/gist/[a-f0-9]*?/zip/'
+ooo-patterns-req-hdr: 'https://codeload.github.com/gist/{STRING:ID}/', 'https://codeload.github.com/gist/{STRING:f1}/zip/', 'https://codeload.github.com/gist/[-a-zA-Z0-9]*/zip/{STRING:f2}[\\n\\r$&;, ]'
+map-get-req-match: "{ID}", {instance}
+Set: {user_name} = request.cookie("ELASTICA_UNAME")
+Log-Req-Match: if (request) "message": "User downloaded a gist (zip).", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Download", "Object_type": "File", "_ObjectName": "{f1}-{f2}.zip", "instance": "{instance}", "status_code": "404"
+rsp-hdr-pattern2: '.*?filename={STRING:NAME__ObjectName}[\n\r; ]'
+get-rsp-body-size: {file_size}
+## ExToPt:True
+Log: "message": "User downloaded a gist (zip) \'{NAME__ObjectName}\'.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Download", "Object_type": "File", "_ObjectName": "{NAME__ObjectName}", "File_Size": "{file_size}", "_ContentInline": "1", "instance": "{instance}", "status_code": "404"
+SKIP
+
+##########################################################################
+
+[AUTOEPD_DownloadZip_Repository_Singleton_0]
+# Host: codeload.github.com
+# Sample Request Header: GET https://codeload.github.com/teamgithubcasb/rep123/zip/refs/heads/main?token=APMWG4ICTTYGRGHXRK6WPXLGHG77I HTTP/1.1
+req-hdr-pattern: '^GET https://codeload\\.github\\.com/[^ ]*?/zip/'
+ooo-patterns-req-hdr: 'https://codeload.github.com/{STRING:instance}/','https://codeload.github.com/[-a-zA-Z0-9]*/{STRING:repository}/',' https://codeload.github.com/[^ ]+/heads/{STRING:branch}[?]token'
+Set: {user_name} = request.cookie("ELASTICA_UNAME")
+extract-rsp-content-disposition-filename: {file_name}
+get-rsp-body-size: {file_size}
+rsp-hdr-pattern: 'application/zip(?:\n|\r|&|$|;| )'
+## ExToPt:True
+Log: if ({file_name} == "") "message": "User downloaded a repository (zip).", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Download", "Object_type": "File", "_ObjectName": "Unknown", "branch": "{branch}", "instance": "{instance}", "repository": "{repository}", "status_code": "404"
+## ExToPt:True
+Log: if ({file_name} != "")"message": "User downloaded a repository (zip) \'{file_name}\'.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Download", "Object_type": "File", "_ObjectName": "{file_name}", "File_Size": "{file_size}", "_ContentInline": "1", "branch": "{branch}", "instance": "{instance}", "repository": "{repository}", "status_code": "404"
+SKIP
+
+##########################################################################
+
+[AUTOEPD_ExportJSON_AuditLog_Singleton_or_ExportCSV_AuditLog_Singleton_0]
+# Host: github.com
+# Sample Request Header: GET https://github.com/orgs/000rgan1zat10n/audit-log/export?token=46f22500-018e-453 ... 3d6 HTTP/1.1
+req-hdr-pattern: '^GET https://github\\.com/orgs/[^ ]*/audit-log(?: |(?:=|\\?|/|&)[^ ]*? )HTTP/'
+Set: {user_name} = request.cookie("ELASTICA_UNAME")
+get-rsp-body-size: {file_size}
+## ExToPt:True
+Log: "message": "User exported an audit log.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Download", "Object_type": "File", "_ObjectName": "Unknown", "File_Size": "{file_size}", "_ContentInline": "1", "status_code": "404"
+SKIP
+
+##########################################################################
+
+[AUTOEPD_Generate_PersonalAccessToken_Singleton_0]
+# Host: github.com
+# Sample Request Header: POST https://github.com/settings/tokens HTTP/1.1
+# Sample Request Header for Beta: https://github.com/settings/personal-access-tokens HTTP
+req-hdr-pattern: '^POST https://github.com/settings/(?:|personal-access-)tokens HTTP/'
+req-body-pattern: 'description%'
+Set: {user_name} = request.cookie("ELASTICA_UNAME")
+## ExToPt:True
+Log: "message": "User generated a personal access token.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Create", "Object_type": "Personal Access Token", "instance": "Not Applicable", "branch":"Not Applicable", "repository":"Not Applicable", "status_code": "200"
+SKIP
+
+##########################################################################
+[Import_Repository_Initiated]
+# Sample Request Header: POST https://github.com/new/import HTTP/1.1
+req-hdr-pattern: '^POST[ ]https://github.com/new/import HTTP'
+ooo-patterns-req-body: 'name=\"owner\"\\r\\n\\r\\n{STRING:instance}\\r\\n', 'name=\"repository.name.\"\\r\\n\\r\\n{STRING:repository}\\r\\n'
+Set: {user_name} = request.cookie("ELASTICA_UNAME")
+rsp-hdr-pattern2: '^HTTP[^ ]*[ ]{REGEX:Status:[0-9]+}[ ]'
+## ExToPt:True
+Log: if ({Status} == "302") "message": "User initiated repository import. Repository Name: \'{repository}\'.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Connect External", "Object_type": "Repository", "_ObjectName": "{repository}" , "instance": "{instance}", "repository": "{repository}", "status_code": "200"
+SKIP
+##########################################################################
+
+[AUTOEPD_InvitetoOrganization_Member_Singleton_0]
+# Host: github.com
+# Sample Request Header: POST https://github.com/orgs/ASDF-ORG/invitations/member_adder_add HTTP/1.1
+req-hdr-pattern: '^POST https://github\\.com/orgs/{STRING:NAME_Organizationname}/invitations/member_adder_add HTTP/'
+req-body-pattern: 'identifier={REGEX:NAME__SharedWith:[^&]+?}'
+Set: {user_name} = request.cookie("ELASTICA_UNAME")
+## ExToPt:True
+Log: "message": "User invited a member \'{NAME__SharedWith}\' to \'{NAME_Organizationname}\' organization.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Share", "Object_type": "Organization", "_ObjectName": "{NAME_Organizationname}", "instance": "{NAME_Organizationname}", "branch":"Not Applicable", "repository":"Not Applicable", "_SharedWith": "{NAME__SharedWith}", "status_code": "200"
+SKIP
+
+##########################################################################
+
+[AUTOEPD_LoginSuccessful_Session_Singleton_0]
+# Host: github.com
+# Sample Request Header: POST https://github.com/session HTTP/1.1
+req-hdr-pattern: '^POST https://github\\.com/session(?: |(?:&|/|=|\\?)[^ ]*? )HTTP/'
+req-body-pattern: 'login={STRING:NAME_user}&'
+Log-Req-Match: if (request) "message": "User logged in as \'{NAME_user}\'.", "severity": "informational", "facility": "GitHub", "user": "{NAME_user}", "Activity_type": "Login", "Object_type": "Session","instance" :"Not Applicable", "status_code": "200"
+rsp-hdr-pattern2: '.*?{REGEX:TESTVALUE_0:Found}'
+Insert-Cookie: "ELASTICA_UNAME={NAME_user}"
+## ExToPt:True
+Log: if({TESTVALUE_0} != "") "message": "User logged in as \'{NAME_user}\'.", "severity": "informational", "facility": "GitHub", "user": "{NAME_user}", "Activity_type": "Login", "Object_type": "Session", "instance" :"Not Applicable", "status_code": "200"
+Log: if({TESTVALUE_0} == "") "message": "User failed to login.", "severity": "informational", "facility": "GitHub", "user": "{NAME_user}", "Activity_type": "InvalidLogin", "Object_type": "Session", "instance" :"Not Applicable", "status_code": "200"
+SKIP
+
+##########################################################################
+
+[AUTOEPD_Logout_Session_Singleton_0]
+# Host: github.com
+# Sample Request Header: POST https://github.com/logout HTTP/1.1
+req-hdr-pattern: '^POST https://github\\.com/logout(?: |(?:&|/|=|\\?)[^ ]*? )HTTP/'
+Set: {user_name} = request.cookie('ELASTICA_UNAME')
+Expire-Cookie: 'ELASTICA_UNAME'
+Expire-Cookie: '__u_imp_d__'
+Expire-Cookie: '__t_imp_d__'
+Expire-Cookie: '__p_imp_d__'
+Log: "message": "User logged out. ", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Logout", "Object_type": "Session", "instance" :"Not Applicable"
+SKIP
+
+##########################################################################
+
+[AUTOEPD_PAGE_SCRAPE_AttachFile_Comment_Singleton_or_UploadFile_Repository_Singleton_0]
+# Host: github.com
+# Sample Request Header: POST https://github.com/upload/policies/upload-manifest-files HTTP/1.1
+req-hdr-pattern: '^POST https://github\\.com/upload/policies/[^ ]*? HTTP/'
+ooo-patterns-req-header: 'ELASTICA_UNAME={STRING:NAME_username}[\n\r$; ]'
+ooo-patterns-req-header: '[rR]eferer:[ ]https://github.com/{STRING:instance}/', '[rR]eferer:[ ]https://github.com/[-a-zA-Z0-9]*/{STRING:repository}/', '[rR]eferer:[ ]https://github.com/[-a-zA-Z0-9]*/[-a-zA-Z0-9]*/[-a-zA-Z0-9]*/{STRING:branch}[\\n\\r$&;, ]'
+rsp-body-pattern: '\"X-Amz-Signature\":\"{STRING:USERID_githubproductionuploadmanifestfile7fdce7s3amazonawscom}\",\".*asset_upload_url\"'
+map-put: "{USERID_githubproductionuploadmanifestfile7fdce7s3amazonawscom}", {NAME_username}, transid
+map-put: "{USERID_githubproductionuploadmanifestfile7fdce7s3amazonawscom}_branch", {branch}, transid
+map-put: "{USERID_githubproductionuploadmanifestfile7fdce7s3amazonawscom}_repository", {repository}, transid
+map-put: "{USERID_githubproductionuploadmanifestfile7fdce7s3amazonawscom}_instance", {instance}, transid
+SKIP
+
+##########################################################################
+
+[AUTOEPD_PAGE_SCRAPE_DownloadFile_Comment_Singleton_0]
+# Host: github.com
+# Sample Request Header: GET https://github.com/cl0udsec1/repository/files/1917336/8882.pdf HTTP/1.1
+req-hdr-pattern: '^GET https://github\\.com/[^ ]*/files/[^ ]* HTTP/'
+ooo-patterns-req-header: 'ELASTICA_UNAME={STRING:NAME_username}(?:\\n|\\r|$|;| )'
+ooo-patterns-rsp-header: 'location: https://github-repository.*Date={STRING:USERID_githubproductionrepositoryfile5c1aebs3amazonawscom}&X-Amz-Expires'
+map-put: "{USERID_githubproductionrepositoryfile5c1aebs3amazonawscom}", {NAME_username}, transid
+SKIP
+
+##########################################################################
+
+[AUTOEPD_PAGE_SCRAPE_DownloadFile_Repository_Singleton_0]
+# Host: github.com
+# Sample Request Header: GET https://github.com/EPDTRAINER/asdf-rep0/raw/master/_ASDF_1533.pdf HTTP/1.1
+req-hdr-pattern: '^GET https://github\\.com/[^ ]*?/raw/'
+ooo-patterns-req-hdr: 'GET [^ ]*/raw/{STRING:USERID_rawgithubusercontentcom} HTTP/'
+ooo-patterns-req-header: 'ELASTICA_UNAME={STRING:NAME_username}[\n\r$; ]'
+map-put: "{USERID_rawgithubusercontentcom}", {NAME_username}, transid
+SKIP
+
+##########################################################################
+
+[AUTOEPD_Register_DeveloperApplication_Singleton_0]
+# Host: github.com
+# Sample Request Header: POST https://github.com/settings/applications
+req-hdr-pattern: '^POST https://github\\.com/settings/applications'
+req-body-pattern: 'oauth_application%5Bname%5D={STRING:NAME_Appname}&'
+rsp-hdr-pattern2: '^HTTP.*[ ]{REGEX:status:[0-9]+}[ ]'
+Set: {user_name} = request.cookie("ELASTICA_UNAME")
+## ExToPt:True
+Log: if ({status} == "302") "message": "User registered a developer application \'{NAME_Appname}\'.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Register", "Object_type": "Developer Application", "_ObjectName": "{NAME_Appname}", "branch": "Not Applicable", "instance": "Not Applicable", "repository": "Not Applicable", "status_code": "200"
+SKIP
+
+##########################################################################
+
+[AUTOEPD_Remove_Collaborator_Singleton_0]
+# Host: github.com
+# Sample Request Header: POST https://github.com/githubuserdlpeu/TEST/uninvite_member?member=user
+req-hdr-pattern: '^POST https://github\\.com/[^ ]*?/{STRING:NAME_Repositoryname}/uninvite_member\\?member={STRING:NAME_Collaboratorname}(?: |(?:=|\\?|/|&)[^ ]*? )HTTP/'
+Set: {user_name} = request.cookie("ELASTICA_UNAME")
+## ExToPt:True
+Log: "message": "User \'{user_name}\' removed a collaborator \'{NAME_Collaboratorname}\' for repository \'{NAME_Repositoryname}\'.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Unshare", "Object_type": "Collaborator", "_ObjectName" : "{NAME_Collaboratorname}" ,"status_code": "200"
+SKIP
+
+##########################################################################
+
+[AUTOEPD_Remove_Collaborator_Singleton_1]
+# Host: github.com
+# Sample Request Header: POST https://github.com/EPDTRAINER/R_3_P_0_5_1_T_0_R_Y/settings/remove_members?membe ... MIQ HTTP/1.1
+req-hdr-pattern: '^POST https://github\\.com/[^ ]*?/{STRING:NAME_Repositoryname}/settings/remove_members(?: |(?:=|\\?|/|&)[^ ]*? )HTTP/'
+Set: {user_name} = request.cookie("ELASTICA_UNAME")
+## ExToPt:True
+Log: "message": "User \'{user_name}\' removed a collaborator from repository \'{NAME_Repositoryname}\'.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Unshare", "Object_type": "Collaborator", "status_code": "200"
+SKIP
+
+##########################################################################
+
+[AUTOEPD_PageScrape_Developer_ApplicationSingleton_0]
+#Sample Request Header: GET https://github.com/settings/developers
+req-hdr-pattern: '^GET https://github.com/settings/developers'
+page-scrape: 'text-bold[^ ]*/settings/applications/{REGEX:key:[0-9]+}\">{STRING:value}</',objid
+SKIP
+
+##########################################################################
+
+[AUTOEPD_PageScrape_Developer_ApplicationSingleton_1]
+#Sample Request Header: GET https://github.com/settings/applications/234324324 HTTP
+req-hdr-pattern: '^GET https://github.com/settings/applications/[0-9]+ HTTP/'
+page-scrape: 'href=\"/settings/applications/{REGEX:key:[0-9]+}\" data-view-component=\"true\">{STRING:value}</a>',objid
+SKIP
+
+##########################################################################
+
+[AUTOEPD_RevokeAll_OAuthApplication_Singleton_0]
+# Host: github.com
+# Sample Request Header: POST https://github.com/settings/connections/applications/126567613/revoke_all HTTP/1.1
+req-hdr-pattern: '^POST https://github\\.com/settings/(?:connections/)?applications/{REGEX:DEV_APP_ID:[0-9]+}(?:/)?revoke_all(?:_tokens)? HTTP/'
+Set: {user_name} = request.cookie("ELASTICA_UNAME")
+map-get: "{DEV_APP_ID}", {dev_app_name}
+## ExToPt:True
+Log: "message": "User revoked all OAuth applications. App: \'{dev_app_name}\'", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Logout(Other User)", "Object_type": "OAuth Application", "_ObjectName": "{dev_app_name}", "status_code": "200"
+SKIP
+
+##########################################################################
+
+[AUTOEPD_RevokeAll_PersonalAccessToken_Singleton_0]
+# Host: github.com
+# Sample Request Header: POST https://github.com/settings/tokens/revoke_all HTTP/1.1
+req-hdr-pattern: '^POST https://github\\.com/settings/tokens/revoke_all(?: |(?:&|/|=|\\?)[^ ]*? )HTTP/'
+Set: {user_name} = request.cookie("ELASTICA_UNAME")
+## ExToPt:True
+Log: "message": "User revoked all personal access tokens.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Logout(Other User)", "Object_type": "Personal Access Token", "instance": "Not Applicable", "branch":"Not Applicable", "repository":"Not Applicable", "status_code": "200"
+SKIP
+
+##########################################################################
+
+[AUTOEPD_Revoke_OAuthApplication_Singleton_0]
+# Host: github.com
+# Sample Request Header: POST https://github.com/settings/connections/applications/ae1e9289d9095fbdd02d HTTP/1.1
+req-hdr-pattern: '^POST https://github\\.com/settings/connections/applications/[a-f0-9]+? HTTP/'
+req-body-pattern: 'method=delete'
+Set: {user_name} = request.cookie("ELASTICA_UNAME")
+## ExToPt:True
+Log: "message": "User revoked an OAuth application.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Logout(Other User)", "Object_type": "OAuth Application", "status_code": "200"
+SKIP
+
+##########################################################################
+
+[AUTOEPD_Revoke_Session_Singleton_0]
+# Host: github.com
+# Sample Request Header: POST https://github.com/sessions/126567613/revoke HTTP/1.1
+req-hdr-pattern: '^POST https://github\\.com/sessions/[^ ]*/revoke(?: |(?:&|/|=|\\?)[^ ]*? )HTTP/'
+Set: {user_name} = request.cookie('ELASTICA_UNAME')
+Expire-Cookie: 'ELASTICA_UNAME'
+Expire-Cookie: '__u_imp_d__'
+Expire-Cookie: '__t_imp_d__'
+Expire-Cookie: '__p_imp_d__'
+Log: "message": "User revoked personal settings and security.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Logout", "Object_type": "Session"
+SKIP
+
+##########################################################################
+
+[AUTOEPD_TransferOwnership_Repository_Singleton_0]
+# Host: github.com
+# Sample Request Header: POST https://github.com/000rgan1zat10n/rrreeeppp000/settings/transfer HTTP/1.1
+req-hdr-pattern: '^POST https://github\\.com/[^ ]*/settings/transfer HTTP/'
+req-body-pattern: '\"new_owner\":\"{STRING:NAME__SharedWith}\",' 
+Set: {user_name} = request.cookie("ELASTICA_UNAME")
+rsp-hdr-pattern2: '^HTTP[^ ]*[ ]{REGEX:status:[0-9]+}[ ]'
+## ExToPt:True
+Log: if ({status} == "200") "message": "User transferred repository ownership.  Shared With: \'{NAME__SharedWith}\'.", "severity": "informational", "facility": "GitHub", "user": "{user_name}", "Activity_type": "Share", "Object_type": "Ownership", "_ObjectName": "{NAME__SharedWith}", "_SharedWith": "{NAME__SharedWith}", "branch": "Not Applicable", "status_code": "200"
+SKIP
